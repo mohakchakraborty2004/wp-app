@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
-const BtmSheet = () => {
+const BtmSheet = ({onClose} : {onClose : () => void} ) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -15,20 +15,22 @@ const BtmSheet = () => {
 
   // renders
   return (
-    <GestureHandlerRootView>
+    
         <View style={styles.container}>
         <BottomSheet
+        onClose={onClose}
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
        snapPoints={snapPoints}
        index={2} 
+       enablePanDownToClose={true}
+       handleIndicatorStyle={{height : 0}}
       >
         <BottomSheetView style={styles.contentContainer}>
           <Text>Awesome 🎉</Text>
         </BottomSheetView>
       </BottomSheet>
         </View>
-    </GestureHandlerRootView>
   );
 };
 

@@ -6,16 +6,20 @@ export default function foryou() {
     
     const [sheet, setSheet] = useState<boolean>(false)
 
-    return <SafeAreaView>
+    return <SafeAreaView style={{flex : 1}}>
         <Text>
             for you.
         </Text>
         <Button title="open sheet" 
         onPress={() => {
+            console.log("open")
             setSheet(true);
+            
         }}
         ></Button>
-        {sheet &&   <BtmSheet/>}
+        {sheet &&   <BtmSheet onClose={() => {
+            setSheet(false)
+        }} />}
        
        
     </SafeAreaView>
