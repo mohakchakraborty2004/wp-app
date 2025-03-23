@@ -1,26 +1,31 @@
-import { useState } from "react";
-import { Button, SafeAreaView, Text, View } from "react-native";
-import BtmSheet from "@/components/bottomSheet";
+
+import { View, Text, Button, SafeAreaView } from "react-native"
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+
+
+
+const Tab = createMaterialTopTabNavigator();
 
 export default function foryou() {
-    
-    const [sheet, setSheet] = useState<boolean>(false)
+   return  <Tab.Navigator>
+   <Tab.Screen name="Liked" component={liked} />
+   <Tab.Screen name="Library" component={library} />
+ </Tab.Navigator>
+}
 
-    return <SafeAreaView style={{flex : 1}}>
-        <Text>
-            for you.
-        </Text>
-        <Button title="open sheet" 
-        onPress={() => {
-            console.log("open")
-            setSheet(true);
-            
-        }}
-        ></Button>
-        {sheet &&   <BtmSheet onClose={() => {
-            setSheet(false)
-        }} />}
-       
-       
-    </SafeAreaView>
+function library() {
+   return <SafeAreaView>
+       <Text>
+           for you.
+       </Text>
+   </SafeAreaView>
+}
+
+function liked() {
+   return <SafeAreaView>
+       <Text>
+           for you.
+       </Text>
+   </SafeAreaView>
 }

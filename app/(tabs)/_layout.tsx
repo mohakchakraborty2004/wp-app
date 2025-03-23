@@ -6,7 +6,7 @@ export default function Layout() {
     return <Tabs screenOptions={{tabBarActiveTintColor: "blue", headerShown : false}}>
 
       <Tabs.Screen  
-      name="index" // index.tsx
+      name="foryou" //foryou.tsx
       options={{
          title: "Home",
          tabBarIcon: ({color}) => <FontAwesome size={28} name="home" color={color} />
@@ -14,7 +14,7 @@ export default function Layout() {
       />
 
    <Tabs.Screen  
-      name="foryou" //foryou.tsx
+      name="index" //index.tsx
       options={{
          title: "fyp",
          tabBarIcon: ({color}) => <FontAwesome size={28} name="cogs" color={color} />
@@ -22,7 +22,7 @@ export default function Layout() {
       />
 
 <Tabs.Screen  
-      name="account"
+      name="account" //account.tsx
       options={{
          title: "Account",
          tabBarIcon: ({color}) => <FontAwesome size={28} name="cogs" color={color} />
