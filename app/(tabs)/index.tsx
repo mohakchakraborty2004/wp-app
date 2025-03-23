@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import BtmSheet from "@/components/bottomSheet";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { useWallpapers, Wallpapper } from "@/hooks/useWallpapers";
@@ -9,7 +9,7 @@ import Card from "@/components/imageCard";
 //entry point for the app
 export default function explore() {
     
-    const [sheet, setSheet] = useState<boolean>(false)
+    const [sheet, setSheet] = useState<Wallpapper | null>(null)
     const wallpapers = useWallpapers();
     return <SafeAreaView style={{flex : 1}}>
 
@@ -20,16 +20,29 @@ export default function explore() {
         source={{uri : "https://i.pinimg.com/736x/a3/d4/36/a3d4362f5596302b66c1afa48b1800d5.jpg"}}>
         </Image>}>
         <View style={styles.container}>
-            <View style={styles.innerContainer}>
-            {wallpapers.map((w : Wallpapper) => <Card wallpaper={w}></Card>)}
-            </View>
-            <View style={styles.innerContainer}>
-            {wallpapers.map((w : Wallpapper) => <Card wallpaper={w}></Card>)}
-            </View>
+            
+                <FlatList 
+                data={wallpapers.filter((_ , index)=> index % 2 == 0)} 
+                renderItem={({item}) =>   <View style={styles.innerContainer}><Card onPress={()=> {
+                    setSheet(item)
+                }} wallpaper={item}></Card></View> }
+                />
+           
+           <FlatList 
+                data={wallpapers.filter((_ , index)=> index % 2 == 1)} 
+                renderItem={({item}) =>   <View style={styles.innerContainer}><Card onPress={()=> {
+                    setSheet(item)
+                }} wallpaper={item}></Card></View> }
+                />
         </View>
         </ParallaxScrollView>
         
-      
+        {sheet && <BtmSheet 
+        wp={sheet}
+        onClose={() => {
+           setSheet(null)
+        }} /> }
+                
         {/* <Button title="open sheet" 
         onPress={() => {
             console.log("open")
@@ -37,9 +50,7 @@ export default function explore() {
             
         }}
         ></Button>
-        {sheet &&   <BtmSheet onClose={() => {
-            setSheet(false)
-        }} />} */}
+        {sheet &&   } */}
        
        
     </SafeAreaView>
@@ -52,7 +63,7 @@ const styles = StyleSheet.create({
         padding  : 5
         }, 
         innerContainer : {
-            flex : 0.5 ,
-            padding : 10
+            flex : 1 ,
+            padding : 10, 
         }
 })

@@ -3,7 +3,7 @@ import { Link, Slot, Tabs } from "expo-router";
 import { SafeAreaView, Text, View } from "react-native";
 
 export default function Layout() {
-    return <Tabs screenOptions={{tabBarActiveTintColor: "blue", headerShown : false}}>
+    return <Tabs screenOptions={{tabBarActiveTintColor: "coral", headerShown : false, tabBarActiveBackgroundColor: "black", tabBarInactiveBackgroundColor: "black"}}>
 
       <Tabs.Screen  
       name="foryou" //foryou.tsx
